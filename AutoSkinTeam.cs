@@ -5,7 +5,7 @@ using Oxide.Core;
 
 namespace Oxide.Plugins
 {
-    [Info("AutoSkinTeam", "Feyzi/Toolcub", "1.0.0")]
+    [Info("AutoSkinTeam", "Feyzi/Toolcub", "1.0.1")]
     public class AutoSkinTeam : RustPlugin
     {
         [PluginReference]
@@ -56,6 +56,7 @@ namespace Oxide.Plugins
 
             JObject newClan = Clans.Call<JObject>("GetClan", clanTag);
             string clanOwner = (string)newClan["owner"];
+            string council = (string)newClan["council"];
 
             if (clanOwner != player.UserIDString)
             {
@@ -67,6 +68,11 @@ namespace Oxide.Plugins
                         validMod = true;
                         break;
                     }
+                }
+                
+                if(council == player.UserIDString)
+                {
+                    validMod = true;
                 }
 
                 if (!validMod)
